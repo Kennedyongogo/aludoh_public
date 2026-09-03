@@ -37,11 +37,11 @@ export default defineConfig({
       },
       includeAssets: ["favicon.ico"],
       manifest: {
-        name: "Vihiga LIMS eDAMS Admin Portal",
-        short_name: "Vihiga LIMS Admin",
+        name: "Mcaludoh Consultancy",
+        short_name: "Mcaludoh",
         description:
-          "Vihiga County - Electronic Development Application Management System Admin Portal",
-        theme_color: "#ffffff",
+          "Professional solutions in hydroponics, vertical farming, organic agriculture, agronomy, landscaping, training and environmental services.",
+        theme_color: "#2D6A4F",
         icons: [
           {
             src: "favicon.ico",

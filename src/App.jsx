@@ -1,42 +1,36 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-  useLocation,
-} from "react-router-dom";
-import {
-  ThemeProvider,
-  CssBaseline,
-  Box,
-  CircularProgress,
-} from "@mui/material";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { ThemeProvider, CssBaseline, Box, CircularProgress } from "@mui/material";
 import { theme } from "./theme";
 import "./App.css";
-import React, { useState, useEffect, Suspense, lazy } from "react";
+import React, { useEffect, Suspense, lazy } from "react";
 import { HelmetProvider } from "react-helmet-async";
-import PageRoutes from "./components/PageRoutes";
+import PublicLayout from "./components/layout/PublicLayout";
 
-// Lazy load components
 const Home = lazy(() => import("./pages/Home"));
-const PostDetail = lazy(() => import("./pages/PostDetail"));
-const Pricing = lazy(() => import("./pages/Pricing"));
-const PublicPricing = lazy(() => import("./pages/PublicPricing"));
+const About = lazy(() => import("./pages/About"));
+const Services = lazy(() => import("./pages/Services"));
+const ServiceDetail = lazy(() => import("./pages/ServiceDetail"));
+const Projects = lazy(() => import("./pages/Projects"));
+const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
+const Training = lazy(() => import("./pages/Training"));
+const TrainingDetail = lazy(() => import("./pages/TrainingDetail"));
+const Blog = lazy(() => import("./pages/Blog"));
+const ArticleDetail = lazy(() => import("./pages/ArticleDetail"));
+const Gallery = lazy(() => import("./pages/Gallery"));
+const Testimonials = lazy(() => import("./pages/Testimonials"));
+const Contact = lazy(() => import("./pages/Contact"));
+const RequestService = lazy(() => import("./pages/RequestService"));
+const VerifyCertificate = lazy(() => import("./pages/VerifyCertificate"));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-
   return null;
 }
 
 function App() {
-  const [user, setUser] = useState("");
-  const [drawerOpen, setDrawerOpen] = useState(true); // Drawer open by default
-
   return (
     <HelmetProvider>
       <ThemeProvider theme={theme}>
@@ -51,7 +45,6 @@ function App() {
                   justifyContent: "center",
                   alignItems: "center",
                   height: "100vh",
-                  backgroundColor: "white",
                 }}
               >
                 <CircularProgress />
@@ -59,17 +52,26 @@ function App() {
             }
           >
             <Routes>
-              {/* Public landing page */}
-              <Route path="/" element={<Home />} />
-              {/* Public pricing page - for non-logged in users (Explore button) */}
-              <Route path="/explore-pricing" element={<PublicPricing />} />
-              {/* Post detail page - accessible without auth for sharing */}
-              <Route
-                path="/post/:postId"
-                element={<PostDetail user={null} />}
-              />
-              {/* Authenticated routes - includes pricing with navbar */}
-              <Route path="/*" element={<PageRoutes />} />
+              <Route element={<PublicLayout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/services/:slug" element={<ServiceDetail />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/projects/:slug" element={<ProjectDetail />} />
+                <Route path="/training" element={<Training />} />
+                <Route path="/training/:slug" element={<TrainingDetail />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<ArticleDetail />} />
+                <Route path="/gallery" element={<Gallery />} />
+                <Route path="/testimonials" element={<Testimonials />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/request-service" element={<RequestService />} />
+                <Route
+                  path="/verify/:certificate_number"
+                  element={<VerifyCertificate />}
+                />
+              </Route>
             </Routes>
           </Suspense>
         </Router>
