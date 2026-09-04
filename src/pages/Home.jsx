@@ -10,6 +10,12 @@ import {
 } from "@mui/material";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import {
+  SchoolOutlined,
+  MenuBookOutlined,
+  PhotoLibraryOutlined,
+  FormatQuoteOutlined,
+} from "@mui/icons-material";
 import { apiGet, mediaUrl } from "../utils/api";
 import { fallbackServices } from "../data/siteContent";
 
@@ -83,7 +89,7 @@ export default function Home() {
             position: "absolute",
             inset: 0,
             zIndex: 1,
-            backgroundColor: "#C4A35A",
+            backgroundColor: "#40916C",
             clipPath: {
               xs: "polygon(0 0, 100% 0, 100% 54%, 0 66%)",
               md: "polygon(0 0, 66% 0, 36% 100%, 0 100%)",
@@ -185,28 +191,28 @@ export default function Home() {
                   disableFocusRipple
                   onClick={() => navigate("/request-service")}
                   sx={{
-                    backgroundColor: "#C4A35A",
-                    color: "#1B2A22",
+                    backgroundColor: "#FFFFFF",
+                    color: "#1B4332",
                     px: { xs: 2.25, sm: 3.25 },
                     py: { xs: 1, sm: 1.15 },
                     fontSize: { xs: "0.82rem", sm: "0.92rem" },
                     fontWeight: 700,
                     borderRadius: "999px",
-                    boxShadow: "0 8px 20px rgba(196, 163, 90, 0.28)",
+                    boxShadow: "0 8px 20px rgba(0, 0, 0, 0.16)",
                     WebkitTapHighlightColor: "transparent",
                     "&:hover": {
-                      backgroundColor: "#D4B56C",
-                      boxShadow: "0 10px 24px rgba(196, 163, 90, 0.4)",
+                      backgroundColor: "#F7F4EC",
+                      boxShadow: "0 10px 24px rgba(0, 0, 0, 0.2)",
                     },
                     "&:active": {
-                      backgroundColor: "#B39148",
+                      backgroundColor: "#E8E4D8",
                       boxShadow: "none",
                       transform: "translateY(1px)",
                     },
                     "&:focus, &:focus-visible": {
-                      backgroundColor: "#C4A35A",
+                      backgroundColor: "#FFFFFF",
                       outline: "none",
-                      boxShadow: "0 8px 20px rgba(196, 163, 90, 0.28)",
+                      boxShadow: "0 8px 20px rgba(0, 0, 0, 0.16)",
                     },
                   }}
                 >
@@ -250,7 +256,7 @@ export default function Home() {
       </Box>
       </Box>
 
-      <Box sx={{ pt: { xs: 3, md: 4 }, pb: { xs: 6, md: 8 }, backgroundColor: "#F7F4EC" }}>
+      <Box sx={{ pt: { xs: 3, md: 4 }, pb: { xs: 3, md: 4 }, backgroundColor: "#F7F4EC" }}>
         <Container maxWidth="xl">
           <Box sx={{ textAlign: "center", mb: { xs: 2.5, md: 3.5 }, maxWidth: 640, mx: "auto" }}>
             <Typography variant="h4" sx={{ mb: 1 }}>
@@ -282,15 +288,19 @@ export default function Home() {
                   display: "flex",
                   flexDirection: "column",
                   cursor: "pointer",
-                  border: "1px solid rgba(45, 106, 79, 0.12)",
-                  boxShadow: "none",
+                  backgroundColor: "#FFFFFF",
+                  border: "1.5px solid #2D6A4F",
+                  boxShadow: "0 0 0 1px rgba(45, 106, 79, 0.08)",
                   borderRadius: "18px",
                   transition:
                     "transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease",
                   "&:hover": {
                     transform: "translateY(-4px)",
-                    borderColor: "#C4A35A",
-                    boxShadow: "0 14px 32px rgba(27, 67, 50, 0.12)",
+                    borderColor: "#1B4332",
+                    boxShadow: "0 12px 28px rgba(45, 106, 79, 0.18)",
+                    "& .learn-more::after": {
+                      transform: "scaleX(1)",
+                    },
                   },
                 }}
               >
@@ -304,7 +314,7 @@ export default function Home() {
                 >
                   <Typography
                     sx={{
-                      color: "#C4A35A",
+                      color: "#2D6A4F",
                       fontWeight: 700,
                       fontSize: "0.72rem",
                       letterSpacing: "0.12em",
@@ -336,11 +346,27 @@ export default function Home() {
                     {service.short_description || service.description}
                   </Typography>
                   <Typography
+                    className="learn-more"
                     sx={{
                       mt: 2,
                       color: "primary.main",
                       fontWeight: 700,
                       fontSize: "0.85rem",
+                      width: "fit-content",
+                      position: "relative",
+                      "&::after": {
+                        content: '""',
+                        position: "absolute",
+                        left: 0,
+                        bottom: -2,
+                        width: "100%",
+                        height: 1.5,
+                        borderRadius: 99,
+                        backgroundColor: "#2D6A4F",
+                        transform: "scaleX(0)",
+                        transformOrigin: "left",
+                        transition: "transform 0.25s ease",
+                      },
                     }}
                   >
                     Learn more
@@ -387,25 +413,135 @@ export default function Home() {
         </Box>
       )}
 
-      <Box sx={{ py: 8, backgroundColor: "white" }}>
-        <Container>
-          <Grid container spacing={3}>
+      <Box sx={{ pt: { xs: 2, md: 3 }, pb: { xs: 2, md: 3 }, backgroundColor: "white" }}>
+        <Container maxWidth="xl">
+          <Box sx={{ mb: 2.5, maxWidth: 640, mx: "auto", textAlign: "center" }}>
+            <Typography variant="h5" sx={{ mb: 0.5, fontWeight: 700 }}>
+              Explore more
+            </Typography>
+            <Typography color="text.secondary" sx={{ fontSize: "0.95rem" }}>
+              Tap a card to register for training, read guides, view photos, or
+              see what clients say.
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "1fr",
+                sm: "repeat(2, minmax(0, 1fr))",
+                md: "repeat(4, minmax(0, 1fr))",
+              },
+              gap: 2.5,
+            }}
+          >
             {[
-              ["Training catalogue", "See upcoming courses and register.", "/training"],
-              ["Knowledge Centre", "Practical farming articles and guides.", "/blog"],
-              ["Gallery", "Photos from farms, landscapes and training.", "/gallery"],
-              ["Testimonials", "What clients say about our work.", "/testimonials"],
-            ].map(([title, text, path]) => (
-              <Grid item xs={12} sm={6} md={3} key={path}>
-                <Card sx={{ height: "100%", cursor: "pointer" }} onClick={() => navigate(path)}>
-                  <CardContent>
-                    <Typography variant="h6">{title}</Typography>
-                    <Typography color="text.secondary">{text}</Typography>
+              {
+                title: "Training catalogue",
+                text: "Browse upcoming courses, pick a date, and register in a few steps.",
+                action: "View courses",
+                path: "/training",
+                icon: SchoolOutlined,
+              },
+              {
+                title: "Knowledge Centre",
+                text: "Read practical articles on hydroponics, agronomy and sustainable farming.",
+                action: "Read articles",
+                path: "/blog",
+                icon: MenuBookOutlined,
+              },
+              {
+                title: "Gallery",
+                text: "See photos from farms, landscaping, training and completed projects.",
+                action: "Open gallery",
+                path: "/gallery",
+                icon: PhotoLibraryOutlined,
+              },
+              {
+                title: "Testimonials",
+                text: "Hear from farmers, institutions and businesses we have worked with.",
+                action: "Read stories",
+                path: "/testimonials",
+                icon: FormatQuoteOutlined,
+              },
+            ].map((item) => {
+              const Icon = item.icon;
+              return (
+                <Card
+                  key={item.path}
+                  onClick={() => navigate(item.path)}
+                  sx={{
+                    height: "100%",
+                    cursor: "pointer",
+                    border: "1.5px solid #2D6A4F",
+                    boxShadow: "none",
+                    borderRadius: "18px",
+                    transition:
+                      "transform 0.22s ease, box-shadow 0.22s ease",
+                    "&:hover": {
+                      transform: "translateY(-3px)",
+                      boxShadow: "0 10px 24px rgba(45, 106, 79, 0.12)",
+                      "& .explore-action::after": {
+                        transform: "scaleX(1)",
+                      },
+                    },
+                  }}
+                >
+                  <CardContent sx={{ p: 2.5 }}>
+                    <Box
+                      sx={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: "10px",
+                        backgroundColor: "rgba(45, 106, 79, 0.1)",
+                        color: "primary.main",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        mb: 1.5,
+                      }}
+                    >
+                      <Icon fontSize="small" />
+                    </Box>
+                    <Typography variant="h6" sx={{ mb: 0.75, fontSize: "1.05rem" }}>
+                      {item.title}
+                    </Typography>
+                    <Typography
+                      color="text.secondary"
+                      sx={{ fontSize: "0.88rem", lineHeight: 1.5, mb: 1.5 }}
+                    >
+                      {item.text}
+                    </Typography>
+                    <Typography
+                      className="explore-action"
+                      sx={{
+                        color: "primary.main",
+                        fontWeight: 700,
+                        fontSize: "0.85rem",
+                        width: "fit-content",
+                        position: "relative",
+                        "&::after": {
+                          content: '""',
+                          position: "absolute",
+                          left: 0,
+                          bottom: -2,
+                          width: "100%",
+                          height: 1.5,
+                          borderRadius: 99,
+                          backgroundColor: "#2D6A4F",
+                          transform: "scaleX(0)",
+                          transformOrigin: "left",
+                          transition: "transform 0.25s ease",
+                        },
+                      }}
+                    >
+                      {item.action}
+                    </Typography>
                   </CardContent>
                 </Card>
-              </Grid>
-            ))}
-          </Grid>
+              );
+            })}
+          </Box>
         </Container>
       </Box>
 

@@ -52,7 +52,7 @@ const navLinkSx = (active) => ({
     width: "72%",
     height: 2,
     borderRadius: 99,
-    background: "linear-gradient(90deg, #FFFFFF, #C4A35A)",
+    background: "linear-gradient(90deg, #FFFFFF, #40916C)",
     transform: active
       ? "translateX(-50%) scaleX(1)"
       : "translateX(-50%) scaleX(0)",
@@ -183,7 +183,7 @@ export default function PublicHeader({ services = [] }) {
           backgroundColor: overHero ? "transparent" : "#1B4332",
           backdropFilter: overHero ? "none" : "blur(16px)",
           boxShadow: overHero ? "none" : "0 8px 24px rgba(27, 67, 50, 0.28)",
-          borderBottom: overHero ? "none" : "1px solid rgba(196, 163, 90, 0.28)",
+          borderBottom: overHero ? "none" : "1px solid rgba(64, 145, 108, 0.35)",
           transition:
             "background-color 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease",
         }}
@@ -287,8 +287,8 @@ export default function PublicHeader({ services = [] }) {
               fontSize: { lg: "0.78rem", xl: "0.875rem" },
               background: overHero
                 ? "rgba(255, 255, 255, 0.16)"
-                : "#C4A35A",
-              color: overHero ? "#FFFFFF" : "#1B2A22",
+                : "#FFFFFF",
+              color: overHero ? "#FFFFFF" : "#1B4332",
               border: overHero ? "1px solid rgba(255,255,255,0.55)" : "none",
               boxShadow: "none",
             }}
@@ -414,7 +414,7 @@ export default function PublicHeader({ services = [] }) {
                       bottom: 5,
                       height: 2,
                       borderRadius: 99,
-                      background: "linear-gradient(90deg, #2D6A4F, #C4A35A)",
+                      background: "linear-gradient(90deg, #2D6A4F, #40916C)",
                       transform: active ? "scaleX(1)" : "scaleX(0)",
                       transformOrigin: "left",
                       transition: "transform 0.25s ease",
