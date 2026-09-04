@@ -30,9 +30,9 @@ const isActivePath = (item, pathname) => {
   return pathname === item.path || pathname.startsWith(`${item.path}/`);
 };
 
-const navLinkSx = (active, overHero) => ({
+const navLinkSx = (active) => ({
   position: "relative",
-  color: overHero ? "#FFFFFF" : active ? "primary.main" : "text.primary",
+  color: "#FFFFFF",
   fontWeight: active ? 700 : 600,
   fontSize: { lg: "0.78rem", xl: "0.875rem" },
   lineHeight: 1.2,
@@ -52,9 +52,7 @@ const navLinkSx = (active, overHero) => ({
     width: "72%",
     height: 2,
     borderRadius: 99,
-    background: overHero
-      ? "linear-gradient(90deg, #FFFFFF, #C4A35A)"
-      : "linear-gradient(90deg, #2D6A4F, #C4A35A)",
+    background: "linear-gradient(90deg, #FFFFFF, #C4A35A)",
     transform: active
       ? "translateX(-50%) scaleX(1)"
       : "translateX(-50%) scaleX(0)",
@@ -63,7 +61,7 @@ const navLinkSx = (active, overHero) => ({
   },
   "&:hover": {
     backgroundColor: "transparent",
-    color: overHero ? "#FFFFFF" : "primary.main",
+    color: "#FFFFFF",
     "&::after": {
       transform: "translateX(-50%) scaleX(1)",
     },
@@ -96,7 +94,7 @@ function MenuToggle({ open, onClick, overHero }) {
       sx={{
         display: { xs: "inline-flex", lg: "none" },
         ml: "auto",
-        color: overHero ? "#FFFFFF" : "primary.main",
+        color: "#FFFFFF",
         width: 40,
         height: 40,
         p: 0,
@@ -182,14 +180,10 @@ export default function PublicHeader({ services = [] }) {
         position="fixed"
         elevation={0}
         sx={{
-          backgroundColor: overHero
-            ? "transparent"
-            : scrolled
-              ? "rgba(255, 255, 255, 0.96)"
-              : "rgba(247, 244, 236, 0.96)",
+          backgroundColor: overHero ? "transparent" : "#1B4332",
           backdropFilter: overHero ? "none" : "blur(16px)",
-          boxShadow: scrolled ? "0 8px 24px rgba(45, 106, 79, 0.12)" : "none",
-          borderBottom: overHero ? "none" : "1px solid rgba(45, 106, 79, 0.12)",
+          boxShadow: overHero ? "none" : "0 8px 24px rgba(27, 67, 50, 0.28)",
+          borderBottom: overHero ? "none" : "1px solid rgba(196, 163, 90, 0.28)",
           transition:
             "background-color 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease",
         }}
@@ -208,17 +202,31 @@ export default function PublicHeader({ services = [] }) {
             sx={{
               display: "flex",
               alignItems: "center",
+              gap: 1,
               cursor: "pointer",
               flexShrink: 0,
             }}
             onClick={() => go("/")}
           >
+            <Box
+              component="img"
+              src={encodeURI("/images/logo (1).png")}
+              alt="Mcaludoh Consultancy"
+              sx={{
+                height: { xs: 36, lg: 42 },
+                width: { xs: 36, lg: 42 },
+                objectFit: "contain",
+                borderRadius: "8px",
+                flexShrink: 0,
+                display: "block",
+              }}
+            />
             <Typography
               noWrap
               sx={{
                 fontWeight: 800,
                 fontSize: { xs: "0.95rem", lg: "1rem", xl: "1.15rem" },
-                color: overHero ? "#FFFFFF" : "primary.main",
+                color: "#FFFFFF",
                 lineHeight: 1.2,
               }}
             >
@@ -247,7 +255,7 @@ export default function PublicHeader({ services = [] }) {
                   disableFocusRipple
                   onClick={(e) => setServicesAnchor(e.currentTarget)}
                   endIcon={<ExpandMore sx={{ fontSize: "1rem !important" }} />}
-                  sx={navLinkSx(active, overHero)}
+                  sx={navLinkSx(active)}
                 >
                   {item.label}
                 </Button>
@@ -257,7 +265,7 @@ export default function PublicHeader({ services = [] }) {
                   disableRipple
                   disableFocusRipple
                   onClick={() => go(item.path)}
-                  sx={navLinkSx(active, overHero)}
+                  sx={navLinkSx(active)}
                 >
                   {item.label}
                 </Button>
@@ -279,8 +287,8 @@ export default function PublicHeader({ services = [] }) {
               fontSize: { lg: "0.78rem", xl: "0.875rem" },
               background: overHero
                 ? "rgba(255, 255, 255, 0.16)"
-                : "linear-gradient(45deg, #2D6A4F, #1B4332)",
-              color: overHero ? "#FFFFFF" : undefined,
+                : "#C4A35A",
+              color: overHero ? "#FFFFFF" : "#1B2A22",
               border: overHero ? "1px solid rgba(255,255,255,0.55)" : "none",
               boxShadow: "none",
             }}
