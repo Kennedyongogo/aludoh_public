@@ -285,12 +285,15 @@ export default function PublicHeader({ services = [] }) {
               flexShrink: 0,
               whiteSpace: "nowrap",
               fontSize: { lg: "0.78rem", xl: "0.875rem" },
-              background: overHero
-                ? "rgba(255, 255, 255, 0.16)"
-                : "#FFFFFF",
-              color: overHero ? "#FFFFFF" : "#1B4332",
-              border: overHero ? "1px solid rgba(255,255,255,0.55)" : "none",
+              background: "#FFFFFF",
+              color: "#1B4332",
+              border: "none",
               boxShadow: "none",
+              "&:hover": {
+                background: "#FFFFFF",
+                color: "#1B4332",
+                boxShadow: "none",
+              },
             }}
           >
             Request a Service
