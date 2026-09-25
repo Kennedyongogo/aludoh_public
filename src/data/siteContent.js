@@ -113,100 +113,153 @@ export const fallbackServices = [
   },
 ];
 
-export const fallbackCourses = [
+export const aboutContent = {
+  founder: {
+    name: "Aludoh",
+    role: "Founder & Lead Consultant",
+    photo: "/images/founder.jpg",
+    bio: [
+      "Mcaludoh Consultancy was founded by Aludoh on a simple belief: farmers, schools and businesses deserve advice that works on the ground, not just on paper.",
+      "Aludoh leads the consultancy's work across hydroponics, vertical farming, organic agriculture, agronomy, landscaping and environmental assessment — designing systems, walking the farms and training the people who run them day to day.",
+    ],
+  },
+  values: [
+    {
+      title: "Practical first",
+      text: "Every recommendation is tested against real soil, real budgets and real weather before it reaches a client.",
+    },
+    {
+      title: "Sustainable by design",
+      text: "We build systems that protect soil, water and the surrounding environment while staying productive.",
+    },
+    {
+      title: "Knowledge that stays",
+      text: "Training is built into our work so clients can run, maintain and grow their systems with confidence.",
+    },
+    {
+      title: "True partnership",
+      text: "We stay with clients from the first site visit through harvest, adjusting as the farm grows.",
+    },
+  ],
+  process: [
+    {
+      title: "Assess",
+      text: "Site visit, soil and water review, and a clear picture of your goals and budget.",
+    },
+    {
+      title: "Design",
+      text: "A tailored plan — system layout, crop selection and costing you can act on.",
+    },
+    {
+      title: "Implement",
+      text: "Installation, setup and commissioning handled with you on site.",
+    },
+    {
+      title: "Train & support",
+      text: "Hands-on training for your team and follow-up visits to keep production on track.",
+    },
+  ],
+  vision:
+    "To promote innovative, productive and environmentally sustainable agricultural systems.",
+  mission:
+    "To provide practical technical expertise that helps farmers, businesses and institutions improve agricultural productivity and environmental sustainability.",
+};
+
+// Demo testimonials shown until approved ones exist in the API.
+export const fallbackTestimonials = [
   {
-    name: "Hydroponic Farming Fundamentals",
-    slug: "hydroponic-farming-fundamentals",
-    short_description: "Practical introduction to hydroponic production systems.",
-    duration: "3 Days",
-    mode: "Physical / Online",
-    location: "Nairobi",
-    fee: "KES XXXX",
+    id: "demo-1",
+    client_name: "Grace Wanjiru",
+    organization: "Wanjiru Greens, Kiambu",
+    service: "Hydroponic Farming",
+    rating: 5,
+    content:
+      "Mcaludoh designed and installed our hydroponic greenhouse, then trained two of our staff to run it. Within three months we were supplying lettuce and herbs to two supermarkets in Thika.",
   },
   {
-    name: "Introduction to Hydroponics",
-    slug: "introduction-to-hydroponics",
-    short_description: "Understand hydroponic principles and starter systems.",
-    duration: "2 Days",
-    mode: "Physical / Online",
-    location: "Nairobi",
+    id: "demo-2",
+    client_name: "Peter Otieno",
+    organization: "Kisumu Youth Agripreneurs",
+    service: "Training & Capacity Building",
+    rating: 5,
+    content:
+      "The training was practical from day one: we built a nutrient system with our own hands. Our group now runs three kitchen-garden businesses and the team still answers our questions on WhatsApp.",
   },
   {
-    name: "Commercial Hydroponic Farming",
-    slug: "commercial-hydroponic-farming",
-    short_description: "Design and manage commercial-scale hydroponic farms.",
-    duration: "5 Days",
-    mode: "Physical",
-    location: "Nairobi",
+    id: "demo-3",
+    client_name: "Sr. Mary Achieng",
+    organization: "St. Theresa Girls' School",
+    service: "Vertical Farming",
+    rating: 5,
+    content:
+      "The vertical garden they set up now feeds our school kitchen with fresh greens every week, and the students use it for agriculture practicals. It fits in a space we never thought could grow food.",
   },
   {
-    name: "Vertical Farming",
-    slug: "vertical-farming",
-    short_description: "Space-efficient systems for urban and indoor production.",
-    duration: "3 Days",
-    mode: "Physical / Online",
-    location: "Nairobi",
+    id: "demo-4",
+    client_name: "James Kiprotich",
+    organization: "Kiprotich Family Farm, Eldoret",
+    service: "Agronomy Consultancy",
+    rating: 5,
+    content:
+      "After the soil tests and agronomy plan, we changed our fertiliser programme and planting dates. Our maize yield went up noticeably in the first season and input costs actually came down.",
   },
   {
-    name: "Organic Agriculture",
-    slug: "organic-agriculture",
-    short_description: "Sustainable crop production and soil health practices.",
-    duration: "3 Days",
-    mode: "Physical",
-    location: "Nairobi",
+    id: "demo-5",
+    client_name: "Amina Hassan",
+    organization: "Coastal Breeze Apartments, Mombasa",
+    service: "Landscaping",
+    rating: 4,
+    content:
+      "They transformed a bare compound into a green, low-maintenance landscape with plants that handle the coastal heat. Residents love it and our water bill for the garden is lower than before.",
   },
   {
-    name: "Agronomy",
-    slug: "agronomy",
-    short_description: "Crop, soil and farm management advisory skills.",
-    duration: "4 Days",
-    mode: "Physical",
-    location: "Nairobi",
-  },
-  {
-    name: "Greenhouse Management",
-    slug: "greenhouse-management",
-    short_description: "Setup, climate control and crop management in greenhouses.",
-    duration: "3 Days",
-    mode: "Physical",
-    location: "Nairobi",
-  },
-  {
-    name: "Urban Farming",
-    slug: "urban-farming",
-    short_description: "Productive farming systems for limited urban spaces.",
-    duration: "2 Days",
-    mode: "Physical / Online",
-    location: "Nairobi",
-  },
-  {
-    name: "Landscaping",
-    slug: "landscaping-training",
-    short_description: "Design, installation and maintenance of outdoor spaces.",
-    duration: "3 Days",
-    mode: "Physical",
-    location: "Nairobi",
-  },
-  {
-    name: "Farm Business Management",
-    slug: "farm-business-management",
-    short_description: "Planning, costing and running a profitable farm enterprise.",
-    duration: "3 Days",
-    mode: "Physical / Online",
-    location: "Nairobi",
+    id: "demo-6",
+    client_name: "David Mwangi",
+    organization: "GreenLeaf Developers Ltd",
+    service: "EIA Services",
+    rating: 5,
+    content:
+      "Clear, thorough and on schedule. The EIA report was well organised, the public participation was handled professionally, and our NEMA licence came through without back-and-forth.",
   },
 ];
 
-export const galleryCategories = [
-  "All",
-  "Hydroponics",
-  "Vertical Farming",
-  "Organic Farming",
-  "Landscaping",
-  "Training",
-  "Farm Visits",
-  "Projects",
-];
+export const contactContent = {
+  hours: [
+    { day: "Monday – Friday", time: "8:00 AM – 5:00 PM" },
+    { day: "Saturday", time: "9:00 AM – 1:00 PM" },
+    { day: "Sunday & holidays", time: "WhatsApp only" },
+  ],
+  responseTime: "We usually reply within one working day.",
+  topics: [
+    "General enquiry",
+    "Request a quote",
+    "Site visit",
+    "Training",
+    "Partnership",
+  ],
+  faqs: [
+    {
+      question: "Do you visit farms outside Nairobi?",
+      answer:
+        "Yes. We work across Kenya and schedule site visits based on location. Travel costs are agreed upfront before the visit.",
+    },
+    {
+      question: "How much does a consultation cost?",
+      answer:
+        "It depends on the service and the size of the project. Send us a message with a few details and we will share a clear quote before any work begins.",
+    },
+    {
+      question: "Can you train my staff after installation?",
+      answer:
+        "Training is part of how we work. Every installation includes hands-on training, and we offer follow-up visits and refresher sessions.",
+    },
+    {
+      question: "I only have a small space. Can I still start?",
+      answer:
+        "Absolutely. Vertical and hydroponic systems are designed for small spaces such as balconies, rooftops and school compounds.",
+    },
+  ],
+};
 
 export const getServiceFallback = (slug) =>
   fallbackServices.find((item) => item.slug === slug) || null;

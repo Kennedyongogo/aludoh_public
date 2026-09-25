@@ -20,6 +20,12 @@ export default function RequestService() {
   const { services = [] } = useOutletContext() || {};
   const [searchParams] = useSearchParams();
   const preset = searchParams.get("service");
+  const presetNotes = [
+    searchParams.get("package") && `Package: ${searchParams.get("package")}`,
+    searchParams.get("needs") && `Interested in: ${searchParams.get("needs")}`,
+  ]
+    .filter(Boolean)
+    .join("\n");
   const selectedService = useMemo(
     () =>
       services.find((item) => item.slug === preset || item.id === preset) ||
@@ -38,7 +44,7 @@ export default function RequestService() {
     farming_method: "",
     service_required: "",
     service_id: selectedService?.id || "",
-    additional: "",
+    additional: presetNotes,
   });
 
   useEffect(() => {

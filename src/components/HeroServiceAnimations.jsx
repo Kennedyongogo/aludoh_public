@@ -274,7 +274,7 @@ function EiaIcon() {
   );
 }
 
-function GenericIcon() {
+export function GenericIcon() {
   return (
     <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
       <style>
@@ -294,7 +294,7 @@ function GenericIcon() {
   );
 }
 
-const ICONS = {
+export const ICONS = {
   "hydroponic-farming": HydroponicIcon,
   "vertical-farming": VerticalIcon,
   "organic-agriculture": OrganicIcon,
@@ -450,10 +450,10 @@ export default function HeroServiceAnimations({ services = [] }) {
                     },
                   }}
                 >
-                  <Box component="span" sx={{ display: { xs: "inline", md: "none" } }}>
+                  <Box component="span" sx={{ display: { xs: "inline", xl: "none" } }}>
                     {labels?.xs || fallback}
                   </Box>
-                  <Box component="span" sx={{ display: { xs: "none", md: "inline" } }}>
+                  <Box component="span" sx={{ display: { xs: "none", xl: "inline" } }}>
                     {labels?.md || fallback}
                   </Box>
                 </Typography>
