@@ -321,8 +321,8 @@ export default function HeroServiceAnimations({ services = [] }) {
     <Box
       sx={{
         mt: { xs: 1.5, sm: 2, md: 2.75 },
-        width: { xs: "100%", md: "46vw", lg: "48vw", xl: "50vw" },
-        maxWidth: { xs: "100%", md: "46vw", lg: "48vw", xl: "50vw" },
+        width: { xs: "100%", md: "48vw", xl: "50vw" },
+        maxWidth: { xs: "100%", md: "48vw", xl: "50vw" },
         minWidth: 0,
         overflow: "visible",
       }}
@@ -440,7 +440,7 @@ export default function HeroServiceAnimations({ services = [] }) {
                   noWrap
                   sx={{
                     width: "100%",
-                    fontSize: { xs: "0.48rem", sm: "0.62rem", md: "0.68rem" },
+                    fontSize: { xs: "0.48rem", sm: "0.62rem", md: "0.6rem", lg: "0.68rem" },
                     fontWeight: 700,
                     lineHeight: 1.15,
                     letterSpacing: { xs: 0, md: "0.01em" },

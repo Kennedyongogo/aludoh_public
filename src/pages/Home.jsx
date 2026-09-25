@@ -666,6 +666,7 @@ export default function Home() {
                   fontWeight: 700,
                   letterSpacing: "0.08em",
                   textTransform: "uppercase",
+                  whiteSpace: "nowrap",
                   color: GREEN.mist,
                   backgroundColor: "rgba(216, 243, 220, 0.1)",
                   border: "1px solid rgba(216, 243, 220, 0.25)",
@@ -687,10 +688,11 @@ export default function Home() {
                     "@media (prefers-reduced-motion: reduce)": { animation: "none" },
                   }}
                 />
-                <Box component="span" sx={{ display: { xs: "inline", sm: "none" } }}>
+                <Box component="span" sx={{ display: { xs: "inline", lg: "none" } }}>
                   Agri &amp; environmental experts
+                  <Box component="span" sx={{ display: { xs: "none", sm: "inline" } }}> · Kenya</Box>
                 </Box>
-                <Box component="span" sx={{ display: { xs: "none", sm: "inline" } }}>
+                <Box component="span" sx={{ display: { xs: "none", lg: "inline" } }}>
                   Agricultural &amp; environmental consultants · Kenya
                 </Box>
               </Box>
@@ -732,16 +734,21 @@ export default function Home() {
                 sx={{
                   ...heroEnter(0.25),
                   mb: { xs: 2, md: 3 },
-                  maxWidth: 500,
-                  fontSize: { xs: "0.9rem", sm: "1rem", lg: "1.08rem" },
-                  lineHeight: 1.65,
+                  maxWidth: { xs: 360, sm: 500 },
+                  fontSize: { xs: "0.9rem", sm: "0.98rem", lg: "1.08rem" },
+                  lineHeight: 1.6,
                   color: "rgba(247, 244, 236, 0.86)",
                   "@media (max-height: 700px) and (max-width: 899px)": { display: "none" },
                 }}
               >
-                Hands-on experts in hydroponics, organic farming, landscaping and
-                environmental approvals, helping farms, homes, schools and businesses across
-                Kenya grow more with less, from the first site visit to the first harvest.
+                <Box component="span" sx={{ display: { xs: "inline", sm: "none" } }}>
+                  Farm, landscaping and environmental experts helping Kenya grow more with less.
+                </Box>
+                <Box component="span" sx={{ display: { xs: "none", sm: "inline" } }}>
+                  Hands-on experts in hydroponics, organic farming, landscaping and
+                  environmental approvals. We help farms, homes, schools and businesses
+                  across Kenya grow more with less.
+                </Box>
               </Typography>
               <Box
                 sx={{

@@ -96,7 +96,7 @@ export default function HeroTreeDivider() {
     <>
       <TreeSketch
         show="mobile"
-        viewBox="0 0 1000 1600"
+        viewBox="0 0 1000 1480"
         fillPath={mobileFill}
         edgePath={mobileEdge}
         rimTransform="translate(0 18)"
