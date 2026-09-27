@@ -11,6 +11,7 @@ import {
 } from "@mui/icons-material";
 import { GREEN } from "./PageSections";
 import { daysUntil, formatDate, formatKES } from "../utils/format";
+import { mediaUrl } from "../utils/api";
 
 export const LOW_SEATS = 6;
 
@@ -86,7 +87,9 @@ export default function CourseCard({ course }) {
       }}
     >
       <Box sx={{ position: "relative", overflow: "hidden", aspectRatio: "16 / 10", backgroundColor: GREEN.mist }}>
-        <Box component="img" src={course.image} alt="" loading="lazy" sx={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+        {course.image && (
+          <Box component="img" src={mediaUrl(course.image)} alt="" loading="lazy" sx={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+        )}
         <Box sx={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(27,42,34,0) 55%, rgba(27,42,34,0.55) 100%)" }} />
         <Box sx={{ position: "absolute", top: 14, left: 14, right: 14, display: "flex", justifyContent: "space-between", gap: 1 }}>
           <Box

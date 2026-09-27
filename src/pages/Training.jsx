@@ -105,7 +105,7 @@ function CertificateCheck() {
       <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, gap: 1.25, alignItems: { sm: "flex-start" } }}>
         <TextField
           fullWidth
-          placeholder="e.g. MCA-2026-0142"
+          placeholder="e.g. MCA-CERT-2026-0142"
           value={number}
           onChange={(e) => {
             setNumber(e.target.value.toUpperCase());

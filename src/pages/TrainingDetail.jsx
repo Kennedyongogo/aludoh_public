@@ -28,13 +28,13 @@ import CourseCard, { SeatsBadge, lowestFee, upcomingSessions } from "../componen
 import {
   EMAIL_REGEX,
   EmptyState,
-  fakeSubmit,
   fieldSx,
   normalizePhone,
   primaryButtonSx,
 } from "../components/FormControls";
+import { apiGet, apiPost, mediaUrl } from "../utils/api";
 import { evaluatePhoneInput } from "../utils/phoneValidation";
-import { showThankYou } from "../utils/swal";
+import { showError, showThankYou } from "../utils/swal";
 import { formatDate, formatDateRange, formatKES } from "../utils/format";
 
 const FLEXIBLE = "flexible";
@@ -49,8 +49,6 @@ const includes = (online) => [
   "Verifiable certificate of completion",
   "3 months of WhatsApp follow-up support",
 ];
-
-const bookingRef = () => `MCA-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
 
 function SectionTitle({ children }) {
   return (
@@ -119,7 +117,20 @@ export default function TrainingDetail() {
   const navigate = useNavigate();
   const { settings } = useOutletContext() || {};
   const whatsapp = String(settings?.whatsapp || settings?.phone || "+254 700 000000").replace(/\D/g, "");
-  const course = courses.find((c) => c.slug === slug);
+  // undefined while loading; null when the API doesn't have this course (the prototype copy is shown instead)
+  const [apiCourse, setApiCourse] = useState(undefined);
+  useEffect(() => {
+    let cancelled = false;
+    setApiCourse(undefined);
+    apiGet(`/api/courses/${encodeURIComponent(slug)}`)
+      .then((res) => !cancelled && setApiCourse(res.data || null))
+      .catch(() => !cancelled && setApiCourse(null));
+    return () => {
+      cancelled = true;
+    };
+  }, [slug]);
+  const loadingCourse = apiCourse === undefined;
+  const course = apiCourse || (loadingCourse ? null : courses.find((c) => c.slug === slug));
 
   const sessions = useMemo(() => (course ? upcomingSessions(course) : []), [course]);
   const [booked, setBooked] = useState({});
@@ -149,6 +160,14 @@ export default function TrainingDetail() {
     return () => observer.disconnect();
   }, [course]);
 
+  if (loadingCourse) {
+    return (
+      <Box sx={{ backgroundColor: GREEN.cream, minHeight: "60vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <CircularProgress sx={{ color: GREEN.main }} />
+      </Box>
+    );
+  }
+
   if (!course) {
     return (
       <Box sx={{ backgroundColor: GREEN.cream, py: { xs: 8, md: 12 } }}>
@@ -176,10 +195,13 @@ export default function TrainingDetail() {
   const unitFee = selected?.fee ?? course.fee;
   const total = unitFee ? unitFee * form.participants : null;
   const fromFee = lowestFee(course);
-  const related = [
-    ...courses.filter((c) => c.id !== course.id && c.category === course.category),
-    ...courses.filter((c) => c.id !== course.id && c.category !== course.category),
-  ].slice(0, 3);
+  const related =
+    course.related ||
+    [
+      ...courses.filter((c) => c.id !== course.id && c.category === course.category),
+      ...courses.filter((c) => c.id !== course.id && c.category !== course.category),
+    ].slice(0, 3);
+  const heroImage = mediaUrl(course.image || "").replace(/w=\d+/, "w=1800");
 
   const validate = (values) => {
     const found = {};
@@ -222,14 +244,30 @@ export default function TrainingDetail() {
     setTouched({ name: true, phone: true, email: true, preferred_date: true, participants: true });
     if (Object.keys(found).length) return;
 
+    const phone = normalizePhone(form.phone);
     setSubmitting(true);
-    await fakeSubmit();
-    setSubmitting(false);
+    let reference;
+    try {
+      const { data } = await apiPost("/api/training-bookings/submit", {
+        course: course.slug,
+        ...(selected ? { session_id: selected.id } : { preferred_date: form.preferred_date }),
+        name: form.name.trim(),
+        phone,
+        email: form.email.trim(),
+        organization: form.organization.trim(),
+        participants: form.participants,
+      });
+      reference = data?.reference;
+    } catch (error) {
+      showError(error.message);
+      return;
+    } finally {
+      setSubmitting(false);
+    }
 
     const firstName = form.name.trim().split(" ")[0];
     const seats = form.participants;
     const seatText = `${seats} ${seats === 1 ? "seat" : "seats"}`;
-    const phone = normalizePhone(form.phone);
 
     if (selected) {
       setBooked((prev) => ({ ...prev, [selected.id]: (prev[selected.id] || 0) + seats }));
@@ -240,7 +278,7 @@ export default function TrainingDetail() {
       text: selected
         ? `We've reserved ${seatText} on ${course.name} (${formatDateRange(selected.start_date, selected.end_date)}, ${selected.location}). Our team will call you on ${phone} within 24 hours with payment and joining details.`
         : `Thanks for your interest in ${course.name}. We'll call you on ${phone} to confirm a session around ${formatDate(form.preferred_date)}.`,
-      note: `Booking reference: ${bookingRef()}. A copy has been sent to ${form.email.trim()}.`,
+      note: reference ? `Booking reference: ${reference}. Keep it handy for when we call.` : undefined,
       confirmText: "Done",
     });
 
@@ -268,12 +306,14 @@ export default function TrainingDetail() {
       </Helmet>
 
       <Box sx={{ position: "relative", color: "#FFFFFF", overflow: "hidden" }}>
-        <Box
-          component="img"
-          src={course.image.replace(/w=\d+/, "w=1800")}
-          alt=""
-          sx={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-        />
+        {heroImage && (
+          <Box
+            component="img"
+            src={heroImage}
+            alt=""
+            sx={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+          />
+        )}
         <Box
           sx={{
             position: "absolute",
