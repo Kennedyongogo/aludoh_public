@@ -333,15 +333,25 @@ export default function RequestService() {
   );
 
   return (
-    <Box sx={{ py: { xs: 6, md: 9 }, bgcolor: GREEN.cream }}>
+    <Box sx={{ p: { xs: 2, sm: 3 }, bgcolor: GREEN.cream }}>
       <Helmet>
         <title>Request a Service | Mcaludoh Consultancy</title>
       </Helmet>
-      <Container sx={{ maxWidth: 760 }}>
-        <Typography variant="h3" sx={{ mb: 1.5, color: GREEN.deep, fontWeight: 700 }}>
+      <Container disableGutters sx={{ maxWidth: 760 }}>
+        <Typography
+          variant="h3"
+          sx={{
+            mb: 1,
+            color: GREEN.deep,
+            fontWeight: 700,
+            fontSize: "clamp(1.35rem, 6vw, 2.1rem)",
+            lineHeight: 1.2,
+            whiteSpace: "nowrap",
+          }}
+        >
           Request a Service
         </Typography>
-        <Typography color="text.secondary" sx={{ mb: 4 }}>
+        <Typography color="text.secondary" sx={{ mb: 2 }}>
           Tell us what you need and our team will get back to you. You'll get a reference
           number to track your request.
         </Typography>
@@ -401,7 +411,7 @@ export default function RequestService() {
           </Button>
         </Box>
 
-        <Divider sx={{ my: { xs: 5, md: 7 } }} />
+        <Divider sx={{ my: { xs: 2, md: 2.5 } }} />
 
         <Box ref={trackRef} id="track" sx={{ scrollMarginTop: 96 }}>
           <Typography variant="h4" sx={{ mb: 1, color: GREEN.deep, fontWeight: 700 }}>
